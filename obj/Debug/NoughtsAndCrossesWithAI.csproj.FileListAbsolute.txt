@@ -7,3 +7,12 @@ C:\Users\Ben\Documents\Visual Studio 2012\Projects\OpenGLC++\NoughtsAndCrossesWi
 C:\Users\Ben\Documents\Visual Studio 2012\Projects\OpenGLC++\NoughtsAndCrossesWithAI\obj\Debug\NoughtsAndCrossesWithAI.csproj.GenerateResource.Cache
 C:\Users\Ben\Documents\Visual Studio 2012\Projects\OpenGLC++\NoughtsAndCrossesWithAI\obj\Debug\NoughtsAndCrossesWithAI.exe
 C:\Users\Ben\Documents\Visual Studio 2012\Projects\OpenGLC++\NoughtsAndCrossesWithAI\obj\Debug\NoughtsAndCrossesWithAI.pdb
+C:\Users\Ben\Documents\Visual Studio 2012\Projects\NoughtsAndCrossesWithAI\NoughtsAndCrosses\bin\Debug\NoughtsAndCrossesWithAI.exe.config
+C:\Users\Ben\Documents\Visual Studio 2012\Projects\NoughtsAndCrossesWithAI\NoughtsAndCrosses\obj\Debug\NoughtsAndCrossesWithAI.exe
+C:\Users\Ben\Documents\Visual Studio 2012\Projects\NoughtsAndCrossesWithAI\NoughtsAndCrosses\obj\Debug\NoughtsAndCrossesWithAI.pdb
+C:\Users\Ben\Documents\Visual Studio 2012\Projects\NoughtsAndCrossesWithAI\NoughtsAndCrosses\bin\Debug\NoughtsAndCrossesWithAI.exe
+C:\Users\Ben\Documents\Visual Studio 2012\Projects\NoughtsAndCrossesWithAI\NoughtsAndCrosses\bin\Debug\NoughtsAndCrossesWithAI.pdb
+C:\Users\Ben\Documents\Visual Studio 2012\Projects\NoughtsAndCrossesWithAI\NoughtsAndCrosses\obj\Debug\NoughtsAndCrossesWithAI.csprojResolveAssemblyReference.cache
+C:\Users\Ben\Documents\Visual Studio 2012\Projects\NoughtsAndCrossesWithAI\NoughtsAndCrosses\obj\Debug\NoughtsAndCrossesWithAI.Form1.resources
+C:\Users\Ben\Documents\Visual Studio 2012\Projects\NoughtsAndCrossesWithAI\NoughtsAndCrosses\obj\Debug\NoughtsAndCrossesWithAI.Properties.Resources.resources
+C:\Users\Ben\Documents\Visual Studio 2012\Projects\NoughtsAndCrossesWithAI\NoughtsAndCrosses\obj\Debug\NoughtsAndCrossesWithAI.csproj.GenerateResource.Cache
