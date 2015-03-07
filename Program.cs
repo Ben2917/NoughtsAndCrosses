@@ -14,9 +14,12 @@ namespace NoughtsAndCrossesWithAI
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Form1 form1 = new Form1();
+            //AI AIPlayer = new AI(form1);
+            SimpleAI AIPlayer = new SimpleAI(form1);
+            Application.EnableVisualStyles();
+            Application.Run(form1);
         }
     }
 }

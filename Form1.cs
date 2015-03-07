@@ -12,18 +12,24 @@ namespace NoughtsAndCrossesWithAI
 {
     public partial class Form1 : Form
     {
+        #region Variables and Objects
         bool turn = true; // Turn switches to true for X and false for O
         string title = "Noughts and Crosses";
         Random rnd = new Random();
         Button previousButton = new Button();
         int turnCount = 0;
         int AITurns = -1;
+        static SimpleAI myAI = new SimpleAI();
+        #endregion
 
+        #region Form Initialiser
         public Form1()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Button Click Event
         private void ButtonClicked(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -47,9 +53,12 @@ namespace NoughtsAndCrossesWithAI
                 AITurn();
             }
         }
+        #endregion
 
+        #region Game Initialiser
         private void InitialiseGame()
         {
+            // Could be refactored into its own class
             MessageBox.Show("Player to go first will now be selected.", title);
             if (rnd.Next(0, 2) == 0)
             {
@@ -62,71 +71,14 @@ namespace NoughtsAndCrossesWithAI
                 AITurn();
             }
         }
+        #endregion
 
         private void AITurn()
         {
-            #region AI 1
+            myAI.AIMain();
+            #region AI 2 OLD
+            // When going first the AI will place its nought in one of the corners
             /*
-            Button buttonChosen = new Button();
-
-            Func<Button, bool> ButtonEnabled = (button)
-                =>
-            {
-                if (button.Enabled == true)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            };
-
-            while (true)
-            {
-                switch (rnd.Next(0, 9))
-                {
-                    case 0:
-                        buttonChosen = a1;
-                        break;
-                    case 1:
-                        buttonChosen = a2;
-                        break;
-                    case 2:
-                        buttonChosen = a3;
-                        break;
-                    case 3:
-                        buttonChosen = b1;
-                        break;
-                    case 4:
-                        buttonChosen = b2;
-                        break;
-                    case 5:
-                        buttonChosen = b3;
-                        break;
-                    case 6:
-                        buttonChosen = c1;
-                        break;
-                    case 7:
-                        buttonChosen = c2;
-                        break;
-                    case 8:
-                        buttonChosen = c3;
-                        break;
-                }
-
-                if (ButtonEnabled(buttonChosen) == true)
-                {
-                    buttonChosen.PerformClick();
-                    break;
-                }
-                else
-                {
-                    continue;
-                }
-            }
-            */
-            #endregion
             AITurns++;
             if (AITurns == 0)
             {
@@ -150,24 +102,28 @@ namespace NoughtsAndCrossesWithAI
                         break;
                 }
             }
-            else if (AITurns == 1 && b2.Enabled == true)
+            else if (AITurns == 1 && b2.Enabled == true) // This occurs on the AI's next turn if the player has not placed their cross in the middle
             {
                 //TODO: Fill in
             }
-            else if (AITurns == 1 && b2.Enabled == false)
+            else if (AITurns == 1 && b2.Enabled == false) // This occurs if the player does put their cross in the middle
             {
-                //switch(rnd.Next(0, 2))
+                // If the player puts their cross in an edge and not a corner this occurs
                 if (a2.Text == "X" || c2.Text == "X" || b1.Text == "X" || b3.Text == "X")
                 {
+                    // This occurs if the AI chose the top left corner and the player chose the square below
                     if (previousButton == a1 && b1.Text == "X")
                     {
+                        // in this case the plan is to choose an edge square
+                        // that doesn't share a border with the previous AI
+                        // choice.
                         switch (rnd.Next(0, 2))
                         {
                             case 0:
-                                b3.PerformClick();
+                                b3.PerformClick(); // middle right
                                 break;
                             case 1:
-                                c2.PerformClick();
+                                c2.PerformClick(); // or bottom middle
                                 break;
                         }
                     }
@@ -176,10 +132,10 @@ namespace NoughtsAndCrossesWithAI
                         switch (rnd.Next(0, 2))
                         {
                             case 0:
-                                b1.PerformClick();
+                                b1.PerformClick(); // middle left
                                 break;
                             case 1:
-                                c2.PerformClick();
+                                c2.PerformClick(); // bottom middle
                                 break;
                         }
                     }
@@ -188,10 +144,10 @@ namespace NoughtsAndCrossesWithAI
                         switch (rnd.Next(0, 2))
                         {
                             case 0:
-                                a2.PerformClick();
+                                a2.PerformClick(); // top middle
                                 break;
                             case 1:
-                                b3.PerformClick();
+                                b3.PerformClick(); // middle right
                                 break;
                         }
                     }
@@ -200,19 +156,20 @@ namespace NoughtsAndCrossesWithAI
                         switch (rnd.Next(0, 2))
                         {
                             case 0:
-                                a2.PerformClick();
+                                a2.PerformClick(); // top middle
                                 break;
                             case 1:
-                                b1.PerformClick();
+                                b1.PerformClick(); // middle left
                                 break;
                         }
                     }
                 }
-                else
+                else // The player has chosen a corner or the centre
                 {
+                    // The plan in this case is to take the opposite corner
                     if (previousButton == a1)
                     {
-                        c3.PerformClick();
+                        c3.PerformClick(); 
                     }
                     else if (previousButton == a3)
                     {
@@ -267,10 +224,12 @@ namespace NoughtsAndCrossesWithAI
                     b1.PerformClick();
                 }
             }
-
-            
+            #endregion
+            */
         }
+        #endregion
 
+        #region Winner check
         private void CheckForWinner()
         {
             bool winner = false;
@@ -315,16 +274,121 @@ namespace NoughtsAndCrossesWithAI
             }
             else
             {
-                if (turnCount == 9)
+                if (turnCount == 8)
                 {
                     MessageBox.Show("It was a draw!", "Fail!");
+                    this.Close();
                 }
             }
         }
+        #endregion
 
+        #region Public Accessors
+        public void ClickButtons(string buttonName)
+        {
+            // A public method that makes the
+            // form buttons accessible to the
+            // AI class.
+            switch (buttonName)
+            {
+                case "a1":
+                    a1.PerformClick();
+                    break;
+                case "a2":
+                    a2.PerformClick();
+                    break;
+                case "a3":
+                    a3.PerformClick();
+                    break;
+                case "b1":
+                    b1.PerformClick();
+                    break;
+                case "b2":
+                    b2.PerformClick();
+                    break;
+                case "b3":
+                    b3.PerformClick();
+                    break;
+                case "c1":
+                    c1.PerformClick();
+                    break;
+                case "c2":
+                    c2.PerformClick();
+                    break;
+                case "c3":
+                    c3.PerformClick();
+                    break;
+            }
+        }
+
+
+        // Public accessor to check if button is enabled.
+        // Tested - Working
+        public bool ButtonEnabled(string buttonName)
+        {
+            switch (buttonName)
+            {
+                case "a1":
+                    return a1.Enabled;
+                case "a2":
+                    return a2.Enabled;
+                case "a3":
+                    return a3.Enabled;
+                case "b1":
+                    return b1.Enabled;
+                case "b2":
+                    return b2.Enabled;
+                case "b3":
+                    return b3.Enabled;
+                case "c1":
+                    return c1.Enabled;
+                case "c2":
+                    return c2.Enabled;
+                case "c3":
+                    return c3.Enabled;
+                default:
+                    return false;
+                    
+            }
+        }
+
+        // public accessor to get button text.
+        // Needs testing.
+        public string ButtonText(string buttonName)
+        {
+            switch (buttonName)
+            {
+                case "a1":
+                    return a1.Text;
+                case "a2":
+                    return a2.Text;
+                case "a3":
+                    return a3.Text;
+                case "b1":
+                    return b1.Text;
+                case "b2":
+                    return b2.Text;
+                case "b3":
+                    return b3.Text;
+                case "c1":
+                    return c1.Text;
+                case "c2":
+                    return c2.Text;
+                case "c3":
+                    return c3.Text;
+                default:
+                    return null;
+
+            }
+        }
+
+        #endregion
+
+        #region Form load event
         private void Form1_Load(object sender, EventArgs e)
         {
             InitialiseGame();
         }
+        #endregion
     }
 }
