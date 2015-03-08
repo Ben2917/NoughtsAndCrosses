@@ -56,9 +56,45 @@ namespace NoughtsAndCrossesWithAI
         // available.
         static bool BlockOrWin(string noughtOrCross)
         {
-            #region Columns
+            bool column = false, row = false, diagonal = false;
+            column = Columns(noughtOrCross);
+            row = Rows(noughtOrCross);
+            diagonal = Diagonals(noughtOrCross);
+
+            if (column || row || diagonal)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
+
+
+        static bool DecideButton(string button1, string button2, string button3, string noughtOrCross)
+        {
+            if (myForm.ButtonText(button1) == noughtOrCross
+                && myForm.ButtonText(button2) == noughtOrCross
+                && myForm.ButtonEnabled(button3))
+            {
+                myForm.ClickButtons(button3);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        #region Check current board
+        // Method that covers checks for columns
+        static bool Columns(string noughtOrCross)
+        {
+            //DecideButton("a1", "a2", "a3", noughtOrCross);
             #region A possible wins
-            if ( myForm.ButtonText("a1") == noughtOrCross
+            if (myForm.ButtonText("a1") == noughtOrCross
                 && myForm.ButtonText("a2") == noughtOrCross
                 && myForm.ButtonEnabled("a3"))
             {
@@ -81,21 +117,21 @@ namespace NoughtsAndCrossesWithAI
             }
             #endregion
             #region B possible wins
-            else if (myForm.ButtonText("b1") == noughtOrCross 
+            else if (myForm.ButtonText("b1") == noughtOrCross
                 && myForm.ButtonText("b2") == noughtOrCross
                 && myForm.ButtonEnabled("b3"))
             {
                 myForm.ClickButtons("b3");
                 return true;
             }
-            else if (myForm.ButtonText("b1") == noughtOrCross 
+            else if (myForm.ButtonText("b1") == noughtOrCross
                 && myForm.ButtonText("b3") == noughtOrCross
                 && myForm.ButtonEnabled("b2"))
             {
                 myForm.ClickButtons("b2");
                 return true;
             }
-            else if (myForm.ButtonText("b2") == noughtOrCross 
+            else if (myForm.ButtonText("b2") == noughtOrCross
                 && myForm.ButtonText("b3") == noughtOrCross
                 && myForm.ButtonEnabled("b1"))
             {
@@ -104,31 +140,38 @@ namespace NoughtsAndCrossesWithAI
             }
             #endregion
             #region C possible wins
-            else if (myForm.ButtonText("c1") == noughtOrCross 
+            else if (myForm.ButtonText("c1") == noughtOrCross
                 && myForm.ButtonText("c2") == noughtOrCross
                 && myForm.ButtonEnabled("c3"))
             {
                 myForm.ClickButtons("c3");
                 return true;
             }
-            else if (myForm.ButtonText("c1") == noughtOrCross 
+            else if (myForm.ButtonText("c1") == noughtOrCross
                 && myForm.ButtonText("c3") == noughtOrCross
                 && myForm.ButtonEnabled("c2"))
             {
                 myForm.ClickButtons("c2");
                 return true;
             }
-            else if (myForm.ButtonText("c2") == noughtOrCross 
+            else if (myForm.ButtonText("c2") == noughtOrCross
                 && myForm.ButtonText("c3") == noughtOrCross
                 && myForm.ButtonEnabled("c1"))
             {
                 myForm.ClickButtons("c1");
                 return true;
             }
+            else
+            {
+                return false;
+            }
             #endregion
-#endregion
-            #region Rows
-            else if (myForm.ButtonText("a1") == noughtOrCross
+        }
+
+        // Method that covers checks for rows
+        static bool Rows(string noughtOrCross)
+        {
+            if (myForm.ButtonText("a1") == noughtOrCross
                 && myForm.ButtonText("b1") == noughtOrCross
                 && myForm.ButtonEnabled("c1"))
             {
@@ -191,9 +234,16 @@ namespace NoughtsAndCrossesWithAI
                 myForm.ClickButtons("a3");
                 return true;
             }
-            #endregion
-            #region Diagonal possible wins
-            else if ((myForm.ButtonText("a1") == noughtOrCross
+            else
+            {
+                return false;
+            }
+        }
+
+        // Method that covers checks for diagonals
+        static bool Diagonals(string noughtOrCross)
+        {
+            if ((myForm.ButtonText("a1") == noughtOrCross
                 && myForm.ButtonText("c3") == noughtOrCross
                 || myForm.ButtonText("c1") == noughtOrCross
                 && myForm.ButtonText("a3") == noughtOrCross)
@@ -234,7 +284,6 @@ namespace NoughtsAndCrossesWithAI
             {
                 return false;
             }
-            #endregion
         }
         #endregion
 
