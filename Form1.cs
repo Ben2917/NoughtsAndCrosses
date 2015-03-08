@@ -73,6 +73,7 @@ namespace NoughtsAndCrossesWithAI
         }
         #endregion
 
+        #region Play AI turn
         private void AITurn()
         {
             myAI.AIMain();
@@ -226,6 +227,7 @@ namespace NoughtsAndCrossesWithAI
             }
             #endregion
             */
+            #endregion
         }
         #endregion
 
