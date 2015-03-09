@@ -392,5 +392,32 @@ namespace NoughtsAndCrossesWithAI
             InitialiseGame();
         }
         #endregion
+
+        #region Menu buttons
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void instructionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Refer to the read me for instructions on how to play.", title);
+        }
+
+        static void ResetGame()
+        {
+            // TODO: Make this method reset the game.
+        }
+
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResetGame();
+        }
+        
+        private void aboutThisAppToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("A noughts and crosses game with AI.\nBy Mercenary96.", title);
+        }
+        #endregion
     }
 }
