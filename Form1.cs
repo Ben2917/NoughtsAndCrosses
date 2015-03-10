@@ -12,6 +12,10 @@ namespace NoughtsAndCrossesWithAI
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Bug found - sometimes AI takes turn before the turn switches.
+        /// Hard to replicate.
+        /// </summary>
         #region Variables and Objects
         bool turn = true; // Turn switches to true for X and false for O
         string title = "Noughts and Crosses";
