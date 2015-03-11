@@ -271,11 +271,13 @@ namespace NoughtsAndCrossesWithAI
                 {
                     MessageBox.Show("Player wins!", title);
                     this.Close();
+                    Application.Exit();
                 }
                 else
                 {
                     MessageBox.Show("AI Wins!", title);
                     this.Close();
+                    Application.Exit();
                 }
             }
             else
@@ -284,6 +286,7 @@ namespace NoughtsAndCrossesWithAI
                 {
                     MessageBox.Show("It was a draw!", "Fail!");
                     this.Close();
+                    Application.Exit();
                 }
             }
         }
@@ -401,6 +404,7 @@ namespace NoughtsAndCrossesWithAI
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+            Application.Exit();
         }
 
         private void instructionsToolStripMenuItem_Click(object sender, EventArgs e)
