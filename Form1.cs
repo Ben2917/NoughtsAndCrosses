@@ -48,8 +48,8 @@ namespace NoughtsAndCrossesWithAI
                 button.Enabled = false;
             }
 
-            CheckForWinner();
             turn = !turn;
+            CheckForWinner();
             turnCount++;
             
             if (turn == false)
@@ -267,17 +267,15 @@ namespace NoughtsAndCrossesWithAI
 
             if (winner)
             {
-                if (turn == true)
+                if (turn)
                 {
                     MessageBox.Show("Player wins!", title);
-                    this.Close();
-                    Application.Exit();
+                    Exit();
                 }
                 else
                 {
                     MessageBox.Show("AI Wins!", title);
-                    this.Close();
-                    Application.Exit();
+                    Exit();
                 }
             }
             else
@@ -285,8 +283,7 @@ namespace NoughtsAndCrossesWithAI
                 if (turnCount == 8)
                 {
                     MessageBox.Show("It was a draw!", "Fail!");
-                    this.Close();
-                    Application.Exit();
+                    Exit();
                 }
             }
         }
@@ -402,6 +399,11 @@ namespace NoughtsAndCrossesWithAI
 
         #region Menu buttons
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Exit();
+        }
+
+        private void Exit()
         {
             this.Close();
             Application.Exit();

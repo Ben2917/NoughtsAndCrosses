@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -83,6 +84,7 @@ namespace NoughtsAndCrossesWithAI
                 && myForm.ButtonEnabled(button3))
             {
                 myForm.ClickButtons(button3);
+                Debug.WriteLine("{0} has been chosen.", button3);
                 return true;
             }
             else
@@ -110,33 +112,6 @@ namespace NoughtsAndCrossesWithAI
                 return true;
             }
             #endregion
-            #region A possible wins
-            /*
-            if (myForm.ButtonText("a1") == noughtOrCross
-                && myForm.ButtonText("a2") == noughtOrCross
-                && myForm.ButtonEnabled("a3"))
-            {
-                myForm.ClickButtons("a3");
-                return true;
-            }
-            
-            else if (myForm.ButtonText("a1") == noughtOrCross
-                && myForm.ButtonText("a3") == noughtOrCross
-                && myForm.ButtonEnabled("a2"))
-            {
-                myForm.ClickButtons("a2");
-                return true;
-            }
-            
-            else if (myForm.ButtonText("a2") == noughtOrCross
-                && myForm.ButtonText("a3") == noughtOrCross
-                && myForm.ButtonEnabled("a1"))
-            {
-                myForm.ClickButtons("a1");
-                return true;
-            }
-            */
-            #endregion
             #region B possible wins (efficient)
             else if (DecideButton("b1", "b2", "b3", noughtOrCross))
             {
@@ -150,31 +125,6 @@ namespace NoughtsAndCrossesWithAI
             {
                 return true;
             }
-            #endregion
-            #region B possible wins
-            /*
-            else if (myForm.ButtonText("b1") == noughtOrCross
-                && myForm.ButtonText("b2") == noughtOrCross
-                && myForm.ButtonEnabled("b3"))
-            {
-                myForm.ClickButtons("b3");
-                return true;
-            }
-            else if (myForm.ButtonText("b1") == noughtOrCross
-                && myForm.ButtonText("b3") == noughtOrCross
-                && myForm.ButtonEnabled("b2"))
-            {
-                myForm.ClickButtons("b2");
-                return true;
-            }
-            else if (myForm.ButtonText("b2") == noughtOrCross
-                && myForm.ButtonText("b3") == noughtOrCross
-                && myForm.ButtonEnabled("b1"))
-            {
-                myForm.ClickButtons("b1");
-                return true;
-            }
-            */
             #endregion
             #region C possible wins (efficient)
             else if (DecideButton("c1", "c2", "c3", noughtOrCross))
@@ -193,35 +143,6 @@ namespace NoughtsAndCrossesWithAI
             {
                 return false;
             }
-            #endregion
-            #region C possible wins
-            /*
-            else if (myForm.ButtonText("c1") == noughtOrCross
-                && myForm.ButtonText("c2") == noughtOrCross
-                && myForm.ButtonEnabled("c3"))
-            {
-                myForm.ClickButtons("c3");
-                return true;
-            }
-            else if (myForm.ButtonText("c1") == noughtOrCross
-                && myForm.ButtonText("c3") == noughtOrCross
-                && myForm.ButtonEnabled("c2"))
-            {
-                myForm.ClickButtons("c2");
-                return true;
-            }
-            else if (myForm.ButtonText("c2") == noughtOrCross
-                && myForm.ButtonText("c3") == noughtOrCross
-                && myForm.ButtonEnabled("c1"))
-            {
-                myForm.ClickButtons("c1");
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            */
             #endregion
         }
 
@@ -242,31 +163,6 @@ namespace NoughtsAndCrossesWithAI
                 return true;
             }
             #endregion
-            #region 1 possible wins
-            /*
-            if (myForm.ButtonText("a1") == noughtOrCross
-                && myForm.ButtonText("b1") == noughtOrCross
-                && myForm.ButtonEnabled("c1"))
-            {
-                myForm.ClickButtons("c1");
-                return true;
-            }
-            else if (myForm.ButtonText("a1") == noughtOrCross
-                && myForm.ButtonText("c1") == noughtOrCross
-                && myForm.ButtonEnabled("b1"))
-            {
-                myForm.ClickButtons("b1");
-                return true;
-            }
-            else if (myForm.ButtonText("b1") == noughtOrCross
-                && myForm.ButtonText("c1") == noughtOrCross
-                && myForm.ButtonEnabled("a1"))
-            {
-                myForm.ClickButtons("a1");
-                return true;
-            }
-            */
-            #endregion
             #region 2 possible wins (efficient)
             else if (DecideButton("a2", "b2", "c2", noughtOrCross))
             {
@@ -280,31 +176,6 @@ namespace NoughtsAndCrossesWithAI
             {
                 return true;
             }
-            #endregion
-            #region 2 possible wins
-            /*
-            else if (myForm.ButtonText("a2") == noughtOrCross
-            && myForm.ButtonText("b2") == noughtOrCross
-            && myForm.ButtonEnabled("c2"))
-            {
-                myForm.ClickButtons("c2");
-                return true;
-            }
-            else if (myForm.ButtonText("a2") == noughtOrCross
-                && myForm.ButtonText("c2") == noughtOrCross
-                && myForm.ButtonEnabled("b2"))
-            {
-                myForm.ClickButtons("b2");
-                return true;
-            }
-            else if (myForm.ButtonText("b2") == noughtOrCross
-                && myForm.ButtonText("c2") == noughtOrCross
-                && myForm.ButtonEnabled("a2"))
-            {
-                myForm.ClickButtons("a2");
-                return true;
-            }
-            */
             #endregion
             #region 3 possible wins (efficient)
             else if (DecideButton("a3", "b3", "c3", noughtOrCross))
@@ -324,76 +195,38 @@ namespace NoughtsAndCrossesWithAI
                 return false;
             }
             #endregion
-            #region 3 possible wins
-            /*
-            else if (myForm.ButtonText("a3") == noughtOrCross
-            && myForm.ButtonText("b3") == noughtOrCross
-            && myForm.ButtonEnabled("c3"))
-            {
-                myForm.ClickButtons("c3");
-                return true;
-            }
-            else if (myForm.ButtonText("a3") == noughtOrCross
-                && myForm.ButtonText("c3") == noughtOrCross
-                && myForm.ButtonEnabled("b3"))
-            {
-                myForm.ClickButtons("b3");
-                return true;
-            }
-            else if (myForm.ButtonText("b3") == noughtOrCross
-                && myForm.ButtonText("c3") == noughtOrCross
-                && myForm.ButtonEnabled("a3"))
-            {
-                myForm.ClickButtons("a3");
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            */
-            #endregion
         }
 
         // Method that covers checks for diagonals
         static bool Diagonals(string noughtOrCross)
         {
             #region All Diagonals
-            if ((myForm.ButtonText("a1") == noughtOrCross
-                && myForm.ButtonText("c3") == noughtOrCross
-                || myForm.ButtonText("c1") == noughtOrCross
-                && myForm.ButtonText("a3") == noughtOrCross)
-                && myForm.ButtonEnabled("b2"))
+            if (DecideButton("a1", "c3", "b2", noughtOrCross))
             {
-                myForm.ClickButtons("b2");
                 return true;
             }
-            else if (myForm.ButtonText("a1") == noughtOrCross
-                && myForm.ButtonText("b2") == noughtOrCross
-                && myForm.ButtonEnabled("c3"))
+            else if (DecideButton("a3", "c1", "b2", noughtOrCross))
             {
-                myForm.ClickButtons("c3");
                 return true;
             }
-            else if (myForm.ButtonText("b2") == noughtOrCross
-                && myForm.ButtonText("c3") == noughtOrCross
-                && myForm.ButtonEnabled("a1"))
+            else if (DecideButton("a1", "b2", "c3", noughtOrCross))
             {
-                myForm.ClickButtons("a1");
                 return true;
             }
-            else if (myForm.ButtonText("a3") == noughtOrCross
-                && myForm.ButtonText("b2") == noughtOrCross
-                && myForm.ButtonEnabled("c1"))
+            else if (DecideButton("b2", "c3", "a1", noughtOrCross))
             {
-                myForm.ClickButtons("c1");
                 return true;
             }
-            else if (myForm.ButtonText("c1") == noughtOrCross
-                && myForm.ButtonText("b2") == noughtOrCross
-                && myForm.ButtonEnabled("a3"))
+            else if (DecideButton("a3", "b2", "c1", noughtOrCross))
             {
-                myForm.ClickButtons("a3");
+                return true;
+            }
+            else if (DecideButton("b1", "c2", "a3", noughtOrCross))
+            {
+                return true;
+            }
+            else if (DecideButton("c1", "b2", "a3", noughtOrCross))
+            {
                 return true;
             }
             else
