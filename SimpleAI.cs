@@ -11,10 +11,18 @@ using System.Windows.Forms;
 
 namespace NoughtsAndCrossesWithAI
 {
+    /// <summary>
+    /// This class holds the methods and properties 
+    /// that allow the AI player to compete with a
+    /// human player. It can currently check the board
+    /// to see if a win is available or a block is available
+    /// otherwise it will place its nought randomly.
+    /// </summary>
     class SimpleAI
     {
         /// <summary>
-        /// Optimisation improved - Needs more testing.
+        /// Extra method could be added to allow AI to
+        /// set itself up for wins.
         /// </summary>
         #region Constructor
         static Form1 myForm;
@@ -31,6 +39,36 @@ namespace NoughtsAndCrossesWithAI
         #region Objects and Variables
         static Random rnd = new Random();
         static bool winFound = false, blockFound = false;
+        public static string[] checkPattern = new string[]
+        {
+            // Columns
+            "a1", "a2", "a3",
+            "a1", "a3", "a2",
+            "a2", "a3", "a1",
+            "b1", "b2", "b3",
+            "b1", "b3", "b2",
+            "b2", "b3", "b1",
+            "c1", "c2", "c3",
+            "c1", "c3", "c2",
+            "c2", "c3", "c1",
+            // Rows
+            "a1", "b1", "c1",
+            "a1", "c1", "b1",
+            "b1", "c1", "a1",
+            "a2", "b2", "c2",
+            "a2", "c2", "b2",
+            "b2", "c2", "a2",
+            "a3", "b3", "c3",
+            "a3", "c3", "b3",
+            "b3", "c3", "a3",
+            // Diagonals
+            "a1", "b2", "c3",
+            "a1", "c3", "b2",
+            "b2", "c3", "a1",
+            "a3", "b2", "c1",
+            "a3", "c1", "b2",
+            "b2", "c1", "a3"  
+        };
         #endregion
 
         #region AI main
@@ -60,23 +98,31 @@ namespace NoughtsAndCrossesWithAI
         // available.
         static bool BlockOrWin(string noughtOrCross)
         {
-            bool column = false, row = false, diagonal = false;
-            column = Columns(noughtOrCross);
-            row = Rows(noughtOrCross);
-            diagonal = Diagonals(noughtOrCross);
-
-            if (column || row || diagonal)
+            if (IteratingCheck(noughtOrCross))
             {
                 return true;
             }
-            else
+            else 
             {
                 return false;
             }
         }
-        #endregion
 
-        #region Optimised method
+        // Checks every pattern in the array of patterns for
+        // whether it needs to block or win.
+        static bool IteratingCheck(string noughtOrCross)
+        {
+            for (int i = 0; i < 72; i += 3)
+            {
+                if (DecideButton(checkPattern[i], checkPattern[i + 1], checkPattern[i + 2], noughtOrCross))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // A method that checks to see if a line can be completed either to block or win
         static bool DecideButton(string button1, string button2, string button3, string noughtOrCross)
         {
             if (myForm.ButtonText(button1) == noughtOrCross
@@ -91,149 +137,6 @@ namespace NoughtsAndCrossesWithAI
             {
                 return false;
             }
-        }
-        #endregion
-
-        #region Check current board
-        // Method that covers checks for columns
-        static bool Columns(string noughtOrCross)
-        {
-            #region A possible wins (efficient)
-            if (DecideButton("a1", "a2", "a3", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("a1", "a3", "a2", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("a2", "a3", "a1", noughtOrCross))
-            {
-                return true;
-            }
-            #endregion
-            #region B possible wins (efficient)
-            else if (DecideButton("b1", "b2", "b3", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("b1", "b3", "b2", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("b2", "b3", "b1", noughtOrCross))
-            {
-                return true;
-            }
-            #endregion
-            #region C possible wins (efficient)
-            else if (DecideButton("c1", "c2", "c3", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("c1", "c3", "c2", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("c2", "c3", "c1", noughtOrCross))
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
-            #endregion
-        }
-
-        // Method that covers checks for rows
-        static bool Rows(string noughtOrCross)
-        {
-            #region 1 possible wins (efficient)
-            if (DecideButton("a1", "b1", "c1", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("a1", "c1", "b1", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("b1", "c1", "a1", noughtOrCross))
-            {
-                return true;
-            }
-            #endregion
-            #region 2 possible wins (efficient)
-            else if (DecideButton("a2", "b2", "c2", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("a2", "c2", "b2", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("b2", "c2", "a2", noughtOrCross))
-            {
-                return true;
-            }
-            #endregion
-            #region 3 possible wins (efficient)
-            else if (DecideButton("a3", "b3", "c3", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("a3", "c3", "b3", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("b3", "c3", "a3", noughtOrCross))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            #endregion
-        }
-
-        // Method that covers checks for diagonals
-        static bool Diagonals(string noughtOrCross)
-        {
-            #region All Diagonals
-            if (DecideButton("a1", "c3", "b2", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("a3", "c1", "b2", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("a1", "b2", "c3", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("b2", "c3", "a1", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("a3", "b2", "c1", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("b1", "c2", "a3", noughtOrCross))
-            {
-                return true;
-            }
-            else if (DecideButton("c1", "b2", "a3", noughtOrCross))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            #endregion
         }
         #endregion
 

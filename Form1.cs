@@ -10,6 +10,10 @@ using System.Windows.Forms;
 
 namespace NoughtsAndCrossesWithAI
 {
+    /// <summary>
+    /// This class holds all the methods assosciated
+    /// with basic noughts and crosses gameplay.
+    /// </summary>
     public partial class Form1 : Form
     {
         /// <summary>
@@ -54,7 +58,7 @@ namespace NoughtsAndCrossesWithAI
             
             if (turn == false)
             {
-                AITurn();
+                myAI.AIMain();
             }
         }
         #endregion
@@ -72,166 +76,8 @@ namespace NoughtsAndCrossesWithAI
             {
                 MessageBox.Show("AI player goes first.", title);
                 turn = false;
-                AITurn();
+                myAI.AIMain();
             }
-        }
-        #endregion
-
-        #region Play AI turn
-        private void AITurn()
-        {
-            myAI.AIMain();
-            #region AI 2 OLD
-            // When going first the AI will place its nought in one of the corners
-            /*
-            AITurns++;
-            if (AITurns == 0)
-            {
-                switch (rnd.Next(0, 4))
-                {
-                    case 0:
-                        a1.PerformClick();
-                        previousButton = a1;
-                        break;
-                    case 1:
-                        a3.PerformClick();
-                        previousButton = a3;
-                        break;
-                    case 2:
-                        c1.PerformClick();
-                        previousButton = c1;
-                        break;
-                    case 3:
-                        c3.PerformClick();
-                        previousButton = c3;
-                        break;
-                }
-            }
-            else if (AITurns == 1 && b2.Enabled == true) // This occurs on the AI's next turn if the player has not placed their cross in the middle
-            {
-                //TODO: Fill in
-            }
-            else if (AITurns == 1 && b2.Enabled == false) // This occurs if the player does put their cross in the middle
-            {
-                // If the player puts their cross in an edge and not a corner this occurs
-                if (a2.Text == "X" || c2.Text == "X" || b1.Text == "X" || b3.Text == "X")
-                {
-                    // This occurs if the AI chose the top left corner and the player chose the square below
-                    if (previousButton == a1 && b1.Text == "X")
-                    {
-                        // in this case the plan is to choose an edge square
-                        // that doesn't share a border with the previous AI
-                        // choice.
-                        switch (rnd.Next(0, 2))
-                        {
-                            case 0:
-                                b3.PerformClick(); // middle right
-                                break;
-                            case 1:
-                                c2.PerformClick(); // or bottom middle
-                                break;
-                        }
-                    }
-                    else if (previousButton == a3)
-                    {
-                        switch (rnd.Next(0, 2))
-                        {
-                            case 0:
-                                b1.PerformClick(); // middle left
-                                break;
-                            case 1:
-                                c2.PerformClick(); // bottom middle
-                                break;
-                        }
-                    }
-                    else if (previousButton == c1)
-                    {
-                        switch (rnd.Next(0, 2))
-                        {
-                            case 0:
-                                a2.PerformClick(); // top middle
-                                break;
-                            case 1:
-                                b3.PerformClick(); // middle right
-                                break;
-                        }
-                    }
-                    else if (previousButton == c3)
-                    {
-                        switch (rnd.Next(0, 2))
-                        {
-                            case 0:
-                                a2.PerformClick(); // top middle
-                                break;
-                            case 1:
-                                b1.PerformClick(); // middle left
-                                break;
-                        }
-                    }
-                }
-                else // The player has chosen a corner or the centre
-                {
-                    // The plan in this case is to take the opposite corner
-                    if (previousButton == a1)
-                    {
-                        c3.PerformClick(); 
-                    }
-                    else if (previousButton == a3)
-                    {
-                        c1.PerformClick();
-                    }
-                    else if (previousButton == c1)
-                    {
-                        a3.PerformClick();
-                    }
-                    else if (previousButton == c3)
-                    {
-                        a1.PerformClick();
-                    }
-                }
-            }
-            else if(AITurns == 2 && (a1.Text == "X" || a3.Text == "X"
-                || c1.Text == "X" || c3.Text == "X") && b2.Enabled == false)
-            {
-                if (a1.Enabled)
-                {
-                    a1.PerformClick();
-                }
-                else if (a3.Enabled)
-                {
-                    a3.PerformClick();
-                }
-                else if (c1.Enabled)
-                {
-                    c1.PerformClick();
-                }
-                else if (c3.Enabled)
-                {
-                    c3.PerformClick();
-                }
-            }
-            else if (AITurns == 3)
-            {
-                if (a1.Text == "O" && a3.Text == "O" && a2.Enabled)
-                {
-                    a2.PerformClick();
-                }
-                else if (a3.Text == "O" && c3.Text == "O" && b3.Enabled)
-                {
-                    b3.PerformClick();
-                }
-                else if (c1.Text == "O" && c3.Text == "O" && c2.Enabled)
-                {
-                    c2.PerformClick();
-                }
-                else if (a1.Text == "O" && c1.Text == "O" && b1.Enabled)
-                {
-                    b1.PerformClick();
-                }
-            }
-            #endregion
-            */
-            #endregion
         }
         #endregion
 
