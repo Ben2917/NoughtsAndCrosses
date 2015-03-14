@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,17 +17,13 @@ namespace NoughtsAndCrossesWithAI
     /// </summary>
     public partial class Form1 : Form
     {
-        /// <summary>
-        /// Bug found - sometimes AI takes turn before the turn switches.
-        /// Hard to replicate.
-        /// </summary>
         #region Variables and Objects
         bool turn = true; // Turn switches to true for X and false for O
         string title = "Noughts and Crosses";
         Random rnd = new Random();
         Button previousButton = new Button();
         int turnCount = 0;
-        int AITurns = -1;
+        bool playerFirst = false;
         static SimpleAI myAI = new SimpleAI();
         #endregion
 
@@ -41,6 +38,7 @@ namespace NoughtsAndCrossesWithAI
         private void ButtonClicked(object sender, EventArgs e)
         {
             Button button = (Button)sender;
+            bool done = false;
             if (turn == true)
             {
                 button.Text = "X";
@@ -53,10 +51,14 @@ namespace NoughtsAndCrossesWithAI
             }
 
             turn = !turn;
-            CheckForWinner();
+            done = CheckForWinner();
             turnCount++;
-            
-            if (turn == false)
+
+            if (done)
+            {
+                Exit();
+            }
+            else if (turn == false)
             {
                 myAI.AIMain();
             }
@@ -71,6 +73,7 @@ namespace NoughtsAndCrossesWithAI
             if (rnd.Next(0, 2) == 0)
             {
                 MessageBox.Show("Human player goes first.", title);
+                playerFirst = true;
             }
             else
             {
@@ -82,7 +85,7 @@ namespace NoughtsAndCrossesWithAI
         #endregion
 
         #region Winner check
-        private void CheckForWinner()
+        private bool CheckForWinner()
         {
             bool winner = false;
 
@@ -113,15 +116,15 @@ namespace NoughtsAndCrossesWithAI
 
             if (winner)
             {
-                if (turn)
+                if (playerFirst)
                 {
                     MessageBox.Show("Player wins!", title);
-                    Exit();
+                    return true;
                 }
                 else
                 {
                     MessageBox.Show("AI Wins!", title);
-                    Exit();
+                    return true;
                 }
             }
             else
@@ -129,8 +132,9 @@ namespace NoughtsAndCrossesWithAI
                 if (turnCount == 8)
                 {
                     MessageBox.Show("It was a draw!", "Fail!");
-                    Exit();
+                    return true;
                 }
+                return false;
             }
         }
         #endregion
@@ -251,7 +255,7 @@ namespace NoughtsAndCrossesWithAI
 
         private void Exit()
         {
-            this.Close();
+            //this.Close();
             Application.Exit();
         }
 

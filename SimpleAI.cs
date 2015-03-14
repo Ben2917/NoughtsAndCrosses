@@ -125,16 +125,18 @@ namespace NoughtsAndCrossesWithAI
         // A method that checks to see if a line can be completed either to block or win
         static bool DecideButton(string button1, string button2, string button3, string noughtOrCross)
         {
+            Debug.WriteLine("{0} - {1} - {2} checked", button1, button2, button3);
             if (myForm.ButtonText(button1) == noughtOrCross
                 && myForm.ButtonText(button2) == noughtOrCross
                 && myForm.ButtonEnabled(button3))
             {
                 myForm.ClickButtons(button3);
-                Debug.WriteLine("{0} has been chosen.", button3);
+                Debug.WriteLine("Button " + button3 + " suitable.");
                 return true;
             }
             else
             {
+                Debug.WriteLine("No suitable move found.");
                 return false;
             }
         }
@@ -145,6 +147,7 @@ namespace NoughtsAndCrossesWithAI
         // purely to keep the game going
         static void RandomChoice()
         {
+            Debug.WriteLine("Moving to random choice.");
             #region AI 1
             // Buttons need setting to the public
             // accessors.
@@ -184,6 +187,7 @@ namespace NoughtsAndCrossesWithAI
 
                 if (myForm.ButtonEnabled(buttonChosen))
                 {
+                    Debug.WriteLine("Button " + buttonChosen + " chosen.");
                     myForm.ClickButtons(buttonChosen);
                     break;
                 }
